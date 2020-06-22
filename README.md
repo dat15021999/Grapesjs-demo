@@ -1,3 +1,6 @@
+This project is a demo based on the available Grapesjs
+
+
 # [GrapesJS](http://grapesjs.com)
 
 [![Build Status](https://travis-ci.org/artf/grapesjs.svg?branch=master)](https://travis-ci.org/artf/grapesjs)
