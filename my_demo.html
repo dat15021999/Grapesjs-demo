@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>My Demo</title>
+    <link rel="stylesheet" href="dist/css/grapes.min.css">
+    <script src="dist/grapes.min.js"></script>
+    <style>
+        body,
+        html {
+            /* background-color: #444444; */
+            height: 100%;
+            margin: 0;
+        }
+
+        #bar {
+            background-color: #444499;
+            width: 100%;
+            height: 40px;
+            border-bottom: 1px solid aqua;
+        }
+
+        .right_panel {
+            float: right;
+            background-color: #444444;
+            height: 100%;
+            width: 20%;
+        }
+
+    
+        #blocks {
+            border: 1px solid #027cf5;
+            float: right;
+            background-color: #444444;
+            height: 100%;
+            width: 20%;
+        }
+
+        #block_bar {
+            text-align: center;
+            color: #027cf5;
+            width: 100%;
+            height: 30px;
+            border: 1px solid #ffffff;
+        }
+
+        #style_bar {
+            text-align: center;
+            color: #6df300;
+            width: 100%;
+            height: 30px;
+            border: 1px solid #ffffff;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- <div id="bar"></div> -->
+    <div id="gjs" style="height:0px; overflow:hidden;">
+        <div class="panel"></div>
+        <style>
+            .panel {
+                width: 90%;
+                max-width: 700px;
+                border-radius: 3px;
+                padding: 30px 20px;
+                margin: 150px auto 0px;
+                background-color: #d983a6;
+                box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.25);
+                color:rgba(255,255,255,0.75);
+                font: caption;
+                font-weight: 100;
+            }
+
+            #gjs {
+                float: left;
+                background-color: #133456;
+                padding: 5px;
+            }
+
+            .slider {
+                width: 100%;
+                height: 50px;
+                background-color: #317317;
+            }
+
+            .nav {
+                background-color: #f2d5d5;
+                width: 100%;
+                height: 40px;
+            }
+
+            .nav_item {
+                padding-top: 10px;
+                text-align: center;
+                background-color: #f2d5d5;
+                float: right;
+                margin-right: 3%;
+                width: 60px;
+                height: 40px;
+            }
+
+            .tablist {
+                background-color: #00a6ff;
+                width: 100%;
+                height: 120px;
+            }
+
+            .count_down {
+                padding-top: 5px;
+                font-size: 40px;
+                width: 100%;
+                height: 50px;
+                text-align: center;
+            }
+        </style>
+    </div>
+    
+<!--     <div id="blocks">
+        <div id="style_bar" onclick="displayStyleItems()">Style</div>
+        <div id="style_items"></div>
+        <div id="block_bar" onclick="displayBlockItems()">Blocks</div>
+        <div id="block_items"></div>
+    </div>
+ -->
+    <!-- Add block, style components -->
+    <script type="text/javascript">
+        var editor = grapesjs.init({
+            container: '#gjs',
+            fromElement: true,
+            height: '100%',
+            width: '100%',
+            
+            selectorManager: {componentFirst: true},
+
+            storageManager: {
+                autosave: false,
+            },
+
+            blockManager: {
+                // appendTo: "#block_items",
+
+                blocks: [
+                    {
+                        category: "Extra",
+                        id: 'section',
+                        label: '<b>Section</b>',
+                        // height: '15px',
+                        // width: '100%',
+                        attribtues: { class:'gjs-block-section'},
+                        content: `<section>
+                            <h2> This is section </h2>
+                                </section>`
+                    },
+                    {
+                        category: "Extra",
+                        id: 'image',
+                        label: '<b>Image</b>',
+                        attributes: { class: 'gjs-block-image'},
+                        select: true,
+                        content: {type: 'image'},
+                        activate: true
+                    },
+                    {
+                        category: "Extra",
+                        id: "slider",
+                        label: "<b>Slider</b>",
+                        attributes: { class: "gjs-block-slider" },
+                        content: '<div class="slider">dasdasd</div>'
+                    },
+                    {
+                        category: "Extra",
+                        id: "NavBar",
+                        label: "<b>NavBar</b>",
+                        content: '<div class="nav"><div class="nav_item" style="float:left; margin-left:3%">Home</div><div class="nav_item">Contact</div><div class="nav_item">Home</div><div class="nav_item">Home</div></div>'
+                    },
+                    {
+                        category: "Extra",
+                        id: "Tab",
+                        label: "Tab",
+                        content: '<div class="nav"><div class="nav_item" style="float:left; margin-left:2%" onClick="open(event, "Tab1")">Tab1</div><div class="nav_item" style="float:left; margin-left:2%" onClick="open(event, "Tab1")">Tab2</div><div class="nav_item" style="float:left; margin-left:2%" onClick="open(event, "Tab1")">Tab3</div></div><div class="tablist"></div>'
+                    },
+                    {
+                        category: "Basic",
+                        id: "two-columns",
+                        label: "2 columns",
+                        content: '<div>sad</div>'
+                    },
+                    {
+                        category: "Extra",
+                        id: "count-down",
+                        label: "Count Down",
+                        content: '<div>das</div>'
+                    }
+                ]
+            },
+            styleManager : {
+                // appendTo: "#style_items",
+                sectors: [{
+                        name: 'General',
+                        open: false,
+                        buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom']
+                    },{
+                        name: 'Flex',
+                        open: false,
+                        buildProps: ['flex-direction', 'flex-wrap', 'justify-content', 'align-items', 'align-content', 'order', 'flex-basis', 'flex-grow', 'flex-shrink', 'align-self']
+                    },{
+                        name: 'Dimension',
+                        open: false,
+                        buildProps: ['width', 'height', 'max-width', 'min-height', 'margin', 'padding'],
+                    },{
+                        name: 'Typography',
+                        open: false,
+                        buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-shadow'],
+                    },{
+                        name: 'Decorations',
+                        open: false,
+                        buildProps: ['border-radius-c', 'background-color', 'border-radius', 'border', 'box-shadow', 'background'],
+                    },{
+                        name: 'Extra',
+                        open: false,
+                        buildProps: ['transition', 'perspective', 'transform'],
+                    }
+                ]
+            }
+        });
+    </script>
+
+
+    <!-- Set click for block, style -->
+    <script>
+        //dang lay 7 thang nav, sau nay doi ten class
+        function open(evt, TabName) {
+            var i, tabName, TabContent;
+        }
+        
+        display count down
+        function display_CD() {
+
+        }
+
+        function displayBlockItems() {
+            var x = document.getElementById("block_items");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function displayStyleItems() {
+            var x = document.getElementById("style_items");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>
