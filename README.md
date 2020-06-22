@@ -1,4 +1,4 @@
-This project is a demo based on the available Grapesjs
+#This project is a demo based on the available Grapesjs
 
 
 # [GrapesJS](http://grapesjs.com)
